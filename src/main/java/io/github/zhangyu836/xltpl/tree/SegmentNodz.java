@@ -1,4 +1,4 @@
-package com.github.zhangyu836.xltpl.tree;
+package io.github.zhangyu836.xltpl.tree;
 
 public class SegmentNodz extends Nodz {
     String value;

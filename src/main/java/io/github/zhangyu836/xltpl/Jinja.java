@@ -1,6 +1,6 @@
-package com.github.zhangyu836.xltpl;
+package io.github.zhangyu836.xltpl;
 
-import com.github.zhangyu836.xltpl.tag.*;
+import io.github.zhangyu836.xltpl.tag.*;
 import com.hubspot.jinjava.Jinjava;
 import com.hubspot.jinjava.JinjavaConfig;
 

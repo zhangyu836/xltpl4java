@@ -1,4 +1,4 @@
-package com.github.zhangyu836.xltpl;
+package io.github.zhangyu836.xltpl;
 
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;

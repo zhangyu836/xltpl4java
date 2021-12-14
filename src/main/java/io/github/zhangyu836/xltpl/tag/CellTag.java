@@ -1,4 +1,4 @@
-package com.github.zhangyu836.xltpl.tag;
+package io.github.zhangyu836.xltpl.tag;
 
 public class CellTag extends NodzTag {
     @Override
