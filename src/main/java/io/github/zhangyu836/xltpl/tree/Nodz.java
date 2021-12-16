@@ -46,7 +46,7 @@ public class Nodz {
     protected void writeRow(RowNodz rowNode) {}
     protected void writeCell(CellNodz cellNode) {}
     protected void childReenter() {}
-    protected void reenter() {}
+    protected void reenter() {enter();}
     protected void enter() {}
     protected void exit() {}
 }

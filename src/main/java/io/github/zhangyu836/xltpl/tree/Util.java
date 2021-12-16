@@ -7,6 +7,8 @@ public class Util {
     private static Pattern pTagTest = Pattern.compile(TAGTEST);
     private static String XVTEST = "\\{% *xv.+%}";
     private static Pattern pXvTest = Pattern.compile(XVTEST);
+    private static String VCELL = "^ *\\{\\{.+}} *$";
+    private static Pattern pVCell = Pattern.compile(VCELL);
     private static String XVCELL = "^ *\\{% *xv.+%} *$";
     private static Pattern pXvCell = Pattern.compile(XVCELL);
     private static String BLOCKTEST = "\\{%.+%}";
@@ -17,7 +19,6 @@ public class Util {
     public static boolean hasXvTag(String txt) {
         return pXvTest.matcher(txt).find();
     }
-    public static boolean isXvCell(String txt) {
-        return pXvCell.matcher(txt).find();
-    }
+    public static boolean isXvCell(String txt) { return pXvCell.matcher(txt).find(); }
+    public static boolean isVCell(String txt) { return pVCell.matcher(txt).find(); }
 }

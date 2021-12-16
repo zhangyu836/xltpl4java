@@ -41,12 +41,12 @@ public class CellNodz extends Nodz {
             case STRING:
                 String string = rdCell.getStringCellValue();
                 if(Util.hasTag(string)) {
-                    if(Util.hasXvTag(string)) {
-                        if(Util.isXvCell(string)) {
-                            return new XvCellNodz(rdCell, rowIndex, colIndex, string);
-                        } else {
-                            string = TagCellNodz.replaceXvTag(string);
-                        }
+                    if(Util.isXvCell(string)) {
+                        return new XvCellNodz(rdCell, rowIndex, colIndex, string, true);
+                    } else if(Util.isVCell(string)) {
+                        return new XvCellNodz(rdCell, rowIndex, colIndex, string, false);
+                    } else if(Util.hasXvTag(string)) {
+                        string = TagCellNodz.replaceXvTag(string);
                     }
                     return new TagCellNodz(rdCell, rowIndex, colIndex, string);
                 }

@@ -1,6 +1,5 @@
 package io.github.zhangyu836.xltpl;
 
-import io.github.zhangyu836.xltpl.tree.NodzMap;
 import io.github.zhangyu836.xltpl.tree.Tree;
 import org.apache.poi.ss.usermodel.*;
 
@@ -13,7 +12,6 @@ public class BookWriter {
     private final HashMap<String, SheetResource> sheetResourceByName = new HashMap<>();
     private final HashMap<Integer, SheetResource> sheetResourceByIndex = new HashMap<>();
     private final HashMap<String, SheetWriter> sheetWriterByName = new HashMap<>();
-    private Jinja jinja;
 
     public void load(String filename) {
         try {
@@ -43,7 +41,6 @@ public class BookWriter {
             for(int i = index-1; i >= 0; i--){
                 workbook.removeSheetAt(i);
             }
-            jinja = new Jinja();
         }
         catch (Exception e)
         {
@@ -52,20 +49,26 @@ public class BookWriter {
     }
 
     private SheetResource getSheetResource(Map<String, Object> map) {
+        SheetResource sheetResource;
+        int tplIndex;
         String tplName = (String) map.get("tplName");
         if (tplName!=null){
-            SheetResource sheetResource = sheetResourceByName.get(tplName);
+            sheetResource = sheetResourceByName.get(tplName);
             if(sheetResource !=null) {
                 return sheetResource;
             }
         }
         Object index = map.get("tplIndex");
-        int tplIndex = 0;
         try {
             tplIndex = (int) index;
         } catch (Exception e) {
+            tplIndex = 0;
         }
-        return sheetResourceByIndex.get(tplIndex);
+        sheetResource = sheetResourceByIndex.get(tplIndex);
+        if(sheetResource!=null) {
+            return sheetResource;
+        }
+        return sheetResourceByIndex.get(0);
     }
 
     private String getSheetName(Map<String, Object> map) {
@@ -88,8 +91,6 @@ public class BookWriter {
             sheetWriter = new SheetWriter(workbook, sheetResource, sheetName);
             sheetWriterByName.put(sheetName, sheetWriter);
         }
-        sheetResource.sheetTree.setSheetWriter(sheetWriter);
-        NodzMap.setCurrentNodz(sheetResource.sheetTree);
         return sheetWriter;
     }
 
@@ -97,9 +98,7 @@ public class BookWriter {
         SheetResource sheetResource = getSheetResource(map);
         String sheetName = getSheetName(map);
         SheetWriter sheetWriter = getSheetWriter(workbook, sheetResource, sheetName);
-        String template = sheetResource.tpl;
-        jinja.jinjava.render(template, map);
-        sheetWriter.collectRange();
+        sheetResource.renderSheet(map, sheetWriter);
     }
 
     public void renderSheets(ArrayList<Map<String, Object>> mapList) {

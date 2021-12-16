@@ -53,8 +53,9 @@ public class Tree extends Nodz {
                 CellNodz cellNode = CellNodz.createCellNode(cell, rowNum, colNum);
                 rowNode.addChild(cellNode);
             }
+            rowNode.addChild(new Nodz());
         }
-        this.addChild(new Nodz());
+        //this.addChild(new Nodz());
         return new SheetResource(rdSheet, this, maxColNum);
     }
 }
