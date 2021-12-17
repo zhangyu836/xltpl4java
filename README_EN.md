@@ -1,9 +1,9 @@
 
-# xltpl  
-使用 xls/x 文件作为模板来生成 xls/x 文件。 [English](README_EN.md)     
+# xltpl
+A Java library to generate xls/x files from a xls/x template.
 
- 
-## 获取
+
+## Get it
 
 ```xml
 <dependency>
@@ -13,16 +13,18 @@
 </dependency>
 ```
 
-## 使用
 
-*   要使用 xltpl，需要了解 [jinja2 模板的语法](http://docs.jinkan.org/docs/jinja2/templates.html) 。  
-*   选择一个 xls/x 文件作为模板。  
-*   在单元格中插入变量： 
+## Use it
+
+*   To use xltpl, you need to be familiar with the [syntax of jinja2 template](https://jinja.palletsprojects.com/).
+*   Get a pre-written xls/x file as the template.
+*   Put variables in the cells, such as : 
+
 ```jinja2
 {{name}}
-```  
-
-*   在单元格中插入控制语句：
+```
+  
+*   Put control statements in the cells :
 
 ```jinja2
 {%- for row in rows %}
@@ -49,14 +51,16 @@ bookWriter.renderSheet(context);
 bookWriter.save(outFileName);
 ```
 
-> 参见 [示例](https://github.com/zhangyu836/xltpl4java/tree/main/example/src/main/java) 。
+> See [example](https://github.com/zhangyu836/xltpl4java/tree/main/example/src/main/java) .
+ 
+## How it works
 
-## 实现方法
-
-xls/x 文件的每个工作表会被转换为一棵树。  
-树会被转换为带有自定义 tag 的 jinja2 模板。  
-渲染模板时，自定义 tag 所对应的 jinja2 扩展调用相应的树节点来写入 xls/x 文件。
+When xltpl reads a xls/x file, it creates a tree for each worksheet.  
+And, each tree is translated to a jinja2 template with custom tags.  
+When the template is rendered, jinja2 extensions of cumtom tags call corresponding tree nodes to write the xls/x file.
 
 
-## 相关
+
+## Related
 * [xtpl for python](https://github.com/zhangyu836/xltpl)
+
