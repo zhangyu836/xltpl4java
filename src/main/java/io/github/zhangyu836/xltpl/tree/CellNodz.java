@@ -27,13 +27,14 @@ public class CellNodz extends Nodz {
     }
 
     protected void exit() {
-        if(cell==null) {
-            return;
-        }
         parent.writeCell(this);
     }
+    public Cell getCell() {return cell;}
 
     public static CellNodz createCellNode(Cell rdCell, int rowIndex, int colIndex) {
+        if(rdCell==null) {
+            return new NullCellNodz(null, rowIndex, colIndex);
+        }
         CellType cellType = rdCell.getCellType();
         switch (cellType) {
             case NUMERIC:

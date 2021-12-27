@@ -47,15 +47,12 @@ public class Tree extends Nodz {
             for(int colNum = 0; colNum < lastColNum; colNum++)
             {
                 Cell cell = row.getCell(colNum);
-                if(cell==null){
-                    continue;
-                }
                 CellNodz cellNode = CellNodz.createCellNode(cell, rowNum, colNum);
-                rowNode.addChild(cellNode);
+                this.addChild(cellNode);
             }
-            rowNode.addChild(new Nodz());
+            //this.addChild(new Nodz());
         }
-        //this.addChild(new Nodz());
+        this.addChild(new Nodz());
         return new SheetResource(rdSheet, this, maxColNum);
     }
 }

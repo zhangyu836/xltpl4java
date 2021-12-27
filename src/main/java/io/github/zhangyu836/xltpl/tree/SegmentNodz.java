@@ -5,7 +5,7 @@ public class SegmentNodz extends Nodz {
 
     SegmentNodz(String string) {
         value = string;
-        customTag = "seg";
+        //customTag = "seg";
     }
 
     public void append(String rv) {
@@ -27,7 +27,8 @@ class BlockSegmentNodz extends Nodz {
     }
 
     protected String nodeTag() {
-        return value;
+        NodzMap.putNodz(this.nodeKey(), this);
+        return String.format("%s{%%bseg %s %%}{%%endbseg%%}", value, this.nodeKey());
     }
 }
 

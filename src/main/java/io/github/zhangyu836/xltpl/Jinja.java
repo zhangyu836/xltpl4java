@@ -23,11 +23,13 @@ public class Jinja {
         NodzTag nodzTag = new NodzTag();
         CellTag cellTag = new CellTag();
         SegmentTag segmentTag = new SegmentTag();
+        BlockSegmentTag blockSegmentTag = new BlockSegmentTag();
         XvCellTag xvTag = new XvCellTag();
         context.registerTag(rowTag);
         context.registerTag(nodzTag);
         context.registerTag(cellTag);
         context.registerTag(segmentTag);
+        context.registerTag(blockSegmentTag);
         context.registerTag(xvTag);
         interpreter = new JinjavaInterpreter(jinjava, context, jinjavaConfig);
     }
