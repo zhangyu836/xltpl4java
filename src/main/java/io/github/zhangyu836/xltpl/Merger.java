@@ -37,28 +37,31 @@ class MergeRange  {
         } else return rdRowNum == startRdRow && rdColNum > startRdCol;
     }
 
+    private void setRange(int rdRowNum, int rdColNum, int wtRowNum, int wtColNum) {
+        startRdRow = rdRowNum;
+        startRdCol = rdColNum;
+        startWtRow = wtRowNum;
+        startWtCol = wtColNum;
+        endWtRow = wtRowNum;
+        endWtCol = wtColNum;
+    }
+
+    private void setRange() {
+        setRange(-1,-1,-1,-1);
+    }
+
     public boolean mergeCell(int rdRowNum, int rdColNum, int wtRowNum, int wtColNum) {
         if(!isInRange(rdRowNum, rdColNum)) {
             return false;
         }
         if (startRdRow == -1) {
-            startRdRow = rdRowNum;
-            startRdCol = rdColNum;
-            startWtRow = wtRowNum;
-            startWtCol = wtColNum;
-            endWtRow = wtRowNum;
-            endWtCol = wtColNum;
+            setRange(rdRowNum, rdColNum, wtRowNum, wtColNum);
         } else if (toBeMerged(rdRowNum, rdColNum)) {
             endWtRow = Math.max(endWtRow, wtRowNum);
             endWtCol = Math.max(endWtCol, wtColNum);
         } else {
             newRange();
-            startRdRow = rdRowNum;
-            startRdCol = rdColNum;
-            startWtRow = wtRowNum;
-            startWtCol = wtColNum;
-            endWtRow = wtRowNum;
-            endWtCol = wtColNum;
+            setRange(rdRowNum, rdColNum, wtRowNum, wtColNum);
         }
         return true;
     }
@@ -81,12 +84,7 @@ class MergeRange  {
             }
         }
         rangeAddressList.clear();
-        startRdRow = -1;
-        startRdCol = -1;
-        startWtRow = -1;
-        startWtCol = -1;
-        endWtRow = -1;
-        endWtCol = -1;
+        setRange();
     }
 }
 

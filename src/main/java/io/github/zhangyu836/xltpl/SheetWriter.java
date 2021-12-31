@@ -7,36 +7,32 @@ import org.apache.poi.ss.usermodel.*;
 import java.util.HashMap;
 
 public class SheetWriter {
-    private final Sheet rdSheet;
+    private Sheet rdSheet;
     private final Sheet wtSheet;
     //private Workbook workbook;
-    private final int maxColNum;
     private int currentRowNum = -1;
     private int currentColNum = -1;
     private Row currentRow;
-    private HashMap<Integer,Integer> colNums = new HashMap<>();
-    private final Merger merger;
+    private final HashMap<Integer,Integer> colNums = new HashMap<>();
+    private Merger merger;
 
     SheetWriter(Workbook wtWorkbook, SheetResource sheetResource, String sheetName) {
         //workbook = wtWorkbook;
         rdSheet = sheetResource.sheet;
         wtSheet = wtWorkbook.createSheet(sheetName);
-        maxColNum = sheetResource.maxColNum;
         merger = sheetResource.merger;
-        //copyColumnWidths();
         copySheetSettings();
+    }
+
+    public void setSheetResource(SheetResource sheetResource) {
+        rdSheet = sheetResource.sheet;
+        merger = sheetResource.merger;
     }
 
     private void copySheetSettings() {
         //PrintSetup printSetup = rdSheet.getPrintSetup();
         //Header header = rdSheet.getHeader();
         //Footer footer = rdSheet.getFooter();
-    }
-
-    private void copyColumnWidths() {
-        for(int i = 0; i < maxColNum; i++) {
-            wtSheet.setColumnWidth(i, rdSheet.getColumnWidth(i) );
-        }
     }
 
     private void copyColumnWidth(int rdColNum, int wtColNum) {

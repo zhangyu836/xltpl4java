@@ -24,7 +24,7 @@ public class Nodz {
     }
 
     protected String nodeKey() {
-        return String.format("%s,%d", this.parent.nodeKey(), this.no);
+        return  Integer.toHexString(hashCode()) ; //String.format("%s,%d", this.parent.nodeKey(), this.no);
     }
 
     protected String nodeTag() {

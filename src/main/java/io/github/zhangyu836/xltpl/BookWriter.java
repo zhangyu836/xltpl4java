@@ -90,6 +90,8 @@ public class BookWriter {
         if (sheetWriter==null) {
             sheetWriter = new SheetWriter(workbook, sheetResource, sheetName);
             sheetWriterByName.put(sheetName, sheetWriter);
+        } else {
+            sheetWriter.setSheetResource(sheetResource);
         }
         return sheetWriter;
     }

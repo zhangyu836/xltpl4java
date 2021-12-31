@@ -9,7 +9,7 @@ A Java library to generate xls/x files from a xls/x template.
 <dependency>
     <groupId>io.github.zhangyu836</groupId>
     <artifactId>xltpl</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
